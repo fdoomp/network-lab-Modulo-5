@@ -123,3 +123,63 @@ sudo reboot
 
 sudo crm_mon -1 
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+sudo apt update 
+sudo apt upgrade 
+sudo apt install keepalived 
+
+sudo nano /var/www/html/la_pagina_que_tenemos 
+
+sudo nano /etc/keepalived/keepalived.conf
+
+}
+
+vrrp_instance VI_1 {
+        state MASTER
+        interface eth0
+        virtual_router_id 51
+        priority 101
+        advert_int 1 
+        authentication {
+                auth_type PASS
+                auth_pass secret
+         }
+         virtual_ipaddress {
+                 10.0.0.25/24
+         }
+         track_script {
+                 chk_httpd
+         }
+}
+---
+}
+
+vrrp_instance VI_1 {
+        state MASTER
+        interface eth0
+        virtual_router_id 51
+        priority 95
+        advert_int 1 
+        authentication {
+                auth_type PASS
+                auth_pass secret
+         }
+         virtual_ipaddress {
+                 10.0.0.25/24
+         }
+         track_script {
+                 chk_httpd
+         }
+}
+
+
+ip a 
+
+sudo systemctl enable apache2
+sudo systemctl start apache2
+
+sudo systemctl start keepalived
+sudo systemctl enable keepalived
+
+
